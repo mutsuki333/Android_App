@@ -5,4 +5,5 @@ public interface ParserListener {
     void finish();
     void setTitle(final String s);
     void setDescription(final String s);
+    void setUrl(final String url);
 }

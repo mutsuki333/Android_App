@@ -47,6 +47,9 @@ public class BBCSAX extends DefaultHandler {
         else if(entryFound && localName.equals("description")){
             listener.setDescription(element);
         }
+        else if(entryFound && localName.equals("link")){
+            listener.setUrl(element);
+        }
         else if (localName.equals("item")) {
             entryFound = false;
         }

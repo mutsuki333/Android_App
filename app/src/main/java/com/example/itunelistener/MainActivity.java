@@ -1,7 +1,10 @@
 package com.example.itunelistener;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -13,9 +16,10 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements BBCRecyclerViewAdapter.RecyclerViewClickListener {
     ArrayList<String> titles;
     ArrayList<String> descriptions;
+    ArrayList<String> previewURLs;
     BBCRecyclerViewAdapter adapter;
     RecyclerView recyclerView;
     SwipeRefreshLayout swipeRefreshLayout;
@@ -28,9 +32,10 @@ public class MainActivity extends AppCompatActivity {
 
         titles = new ArrayList<String>();
         descriptions = new ArrayList<String>();
+        previewURLs = new ArrayList();
 
         final List<String> data = new ArrayList<String>();
-        adapter = new BBCRecyclerViewAdapter(titles, descriptions);
+        adapter = new BBCRecyclerViewAdapter(titles, descriptions, this);
 
         recyclerView = findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -95,11 +100,25 @@ public class MainActivity extends AppCompatActivity {
                         }
                     });
                 }
+                @Override
+                public void setUrl(final String url) {
+                    previewURLs.add(url);
+                }
             });
 
         } catch (Exception e) {
             e.printStackTrace();
         }
         return;
+    }
+
+    @Override
+    public void onItemClick(View view, int position) {
+        Toast.makeText(this, titles.get(position), Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(this, WebviewActivity.class);
+//        intent.putExtra("title", titles.get(position));
+//        intent.putExtra("cover", covers.get(position));
+        intent.putExtra("url", previewURLs.get(position));
+        startActivity(intent);
     }
 }
