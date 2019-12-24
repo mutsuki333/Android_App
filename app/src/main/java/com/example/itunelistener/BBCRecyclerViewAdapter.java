@@ -10,9 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import static android.content.ContentValues.TAG;
 
 public class BBCRecyclerViewAdapter extends RecyclerView.Adapter<BBCRecyclerViewAdapter.ViewHolder> {
     ArrayList<String> Titles;
@@ -26,7 +23,7 @@ public class BBCRecyclerViewAdapter extends RecyclerView.Adapter<BBCRecyclerView
         public ViewHolder (View v, RecyclerViewClickListener l){
             super(v);
             TitleView = v.findViewById(R.id.title);
-            DesView = v.findViewById(R.id.description);
+//            DesView = v.findViewById(R.id.description);
             listener = l;
         }
 
@@ -39,7 +36,7 @@ public class BBCRecyclerViewAdapter extends RecyclerView.Adapter<BBCRecyclerView
 
     public BBCRecyclerViewAdapter(ArrayList<String> titles, ArrayList<String> descriptions, RecyclerViewClickListener listener){
         Titles = titles;
-        Descriptions = descriptions;
+//        Descriptions = descriptions;
         mListener = listener;
     }
 
@@ -52,7 +49,7 @@ public class BBCRecyclerViewAdapter extends RecyclerView.Adapter<BBCRecyclerView
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.TitleView.setText(Titles.get(position));
-        holder.DesView.setText(Descriptions.get(position));
+//        holder.DesView.setText(Descriptions.get(position));
     }
 
     @NonNull
